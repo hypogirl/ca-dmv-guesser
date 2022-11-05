@@ -1,4 +1,4 @@
-fetch('applications.csv')
+fetch("https://raw.githubusercontent.com/slocknad/ca-dmv-guesser/main/applications.csv")
    .then(r => r.text())
    .then(t => {
         csv_content = t;

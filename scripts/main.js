@@ -24,8 +24,11 @@ function shuffle(array) {
 function displayPlate(info) {
     if (!plates_info.length) plates_info = info;
 
+    const verdict = document.getElementById("verdict");
+    verdict.classList.add("d-none");
+
     const cus_dmv = document.getElementById("cus-dmv");
-    cus_dmv.innerHTML = "Customer: " + plates_info[curr_index]['customer'] + "<p>DMV: " + plates_info[curr_index]['dmv'];
+    cus_dmv.innerHTML = "Customer: " + plates_info[curr_index]['customer'] + "<br>DMV: " + plates_info[curr_index]['dmv'];
 
     const plate = document.getElementById("plate");
     plate.innerHTML = plates_info[curr_index]['plate'];
@@ -36,11 +39,20 @@ function displayPlate(info) {
 
 function checkAnswer(bool) {
     const accepted = plates_info[curr_index++]['result'];
-    const cus_dmv = document.getElementById("cus-dmv");
+    const verdict = document.getElementById("verdict");
 
-    if (accepted)
-        cus_dmv.innerHTML += "<div class=\"accepted\">Verdict: Accepted</div>";
-    else cus_dmv.innerHTML += "<div class=\"denied\">Verdict: Denied</div>";
+    if (accepted)  {
+        verdict.innerHTML = "Verdict: Accepted";
+        verdict.classList.remove("denied");
+        verdict.classList.add("accepted");
+        verdict.classList.remove("d-none");
+    } 
+    else {
+        verdict.innerHTML = "Verdict: Denied";
+        verdict.classList.remove("accepted");
+        verdict.classList.add("denied");
+        verdict.classList.remove("d-none");
+    }
 
     var beginning;
     if (accepted == bool) {
